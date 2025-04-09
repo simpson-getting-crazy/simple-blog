@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use App\View\Helper\Crypt;
 use Migrations\BaseSeed;
 use Cake\Utility\Text;
-use Authentication\PasswordHasher\DefaultPasswordHasher;
 
 /**
  * Users seed.
@@ -27,7 +27,7 @@ class UsersSeed extends BaseSeed
             'id' => Text::uuid(),
             'name' => 'John Doe',
             'email' => 'user@test.com',
-            'password' => (new DefaultPasswordHasher())->hash('password'),
+            'password' => Crypt::hashSha512('password'),
         ];
 
         $table = $this->table('users');
